@@ -35,4 +35,8 @@ export class MrvlComponent implements OnInit, OnDestroy {
     this.destroy$.complete();
   }
 
+  logOut() {
+    this.authService.logout();
+  }
+
 }

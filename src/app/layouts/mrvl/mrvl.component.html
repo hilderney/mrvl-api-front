@@ -1,3 +1,20 @@
-<p>
-  mrvl works!
-</p>
+<header>
+  <div class="main-menu">
+    <ul>
+      <li routerLink="home">
+          Home
+      </li>
+
+      <li routerLink="herois">
+          Heróis
+      </li>
+    </ul>
+  </div>
+ <button (click)="logOut()">Log Out</button>
+</header>
+<div class="main-wrapper">
+  <router-outlet></router-outlet>
+</div>
+<footer>
+  Footer Aqui
+</footer>

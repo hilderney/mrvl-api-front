@@ -1,0 +1,27 @@
+<div class="listar-herois">
+  <div class="filter">
+    <form [formGroup]="form">
+      <div class="form-group">
+        <label for="">Nome</label>
+        <input type="text" formControlName="nameStartsWith">
+      </div>
+
+      <button (click)="fetchHeroes()"> Filtrar </button>
+
+    </form>
+  </div>
+  <div class="list">
+    <pre>
+      {{ (heroes$ | async) | json }}
+    </pre>
+  </div>
+</div>
+
+
+<p>
+  Opções de Rankear Herói
+</p>
+
+<p>
+  Opção de favoritar Herói
+</p>

@@ -52,15 +52,19 @@ export class AuthenticationService {
   }
 
   public refreshToken() {
-    return of('mock').pipe(map(() => {
-      const user: IUser = JSON.parse(localStorage.getItem('token') as string);
-      if (user) {
-        return this.setStorageAndUserVariables(user);
-      } else {
-        this.logout();
-        return null;
-      }
-    }))
+    return of('mock')
+      .pipe(
+        map(() => {
+          const token = localStorage.getItem('token');
+          if (token) {
+            localStorage.setItem('token', token);
+            return token;
+          } else {
+            return null;
+            this.logout();
+          }
+        }
+        ));
   }
 
   public updateUser(user: IUser) {
@@ -88,9 +92,6 @@ export class AuthenticationService {
   }
 
   private startRefreshTokenTimer() {
-    // Traduz o payload JWT para JSON
-    // const jwtToken = this.decodeToken(this.mockToken);
-    // Timeout para realizar o refresh do token automaticamente
     const expires = new Date(2025, 12, 31);
     const timeout = expires.getTime() - Date.now() - (60 * 1000);
     this.refreshTokenTimeout = setTimeout(() => this.refreshToken().subscribe(), timeout);
