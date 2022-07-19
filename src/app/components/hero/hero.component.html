@@ -1,0 +1,43 @@
+<div class="card-hero">
+  <article class="comic">
+    <div class="panel img">
+      <p class="text top-left">{{hero.name}}...</p>
+      <img src="{{hero.thumbnail.path + '/portrait_uncanny' + '.' + hero.thumbnail.extension}}" alt="{{hero.name}}">
+    </div>
+    <div class="panel info">
+      <p class="text top-left">Sobre o personagem...</p>
+      <div class="speech" *ngIf="!!hero.description; else semInfo;">
+        <p>{{hero.description}}</p>
+      </div>
+      <ng-template #semInfo>
+        <p class="speech">
+          Sem Informações
+        </p>
+      </ng-template>
+    </div>
+    <div class="panel">
+      <p class="text top-left">Curiosidades...</p>
+
+      <div class="info-comics" *ngIf="hero.comics.available > 0">
+        <h3> Aparece em {{hero.comics.available}} revistas </h3>
+        <ul *ngFor="let comic of hero.comics.items;">
+          <li>
+            {{comic.name}}
+          </li>
+        </ul>
+      </div>
+
+      <button> ...mais detalhes </button>
+
+      <p class="text bottom-right">THE END</p>
+    </div>
+  </article>
+
+  <p>
+    Rankear Herói
+  </p>
+
+  <p>
+    Favoritar Herói
+  </p>
+</div>

@@ -1,0 +1,154 @@
+.comic {
+  display:flex;
+  justify-content: center;
+  flex-wrap:wrap;
+  font-family:'Comic Sans', cursive;
+  padding:1vmin;
+
+  .panel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+    flex-shrink: 0;
+    background-color:#fff;
+    border:solid 2px #000;
+    box-shadow:0 8px 8px -8px #000;
+    min-width: 200px;
+    min-height: 240px;
+    margin:1vmin;
+    overflow:hidden;
+    position:relative;
+  }
+
+  .text {
+    background-color:#fff;
+    border:solid 2px #000;
+    margin:0;
+    padding:3px 8px;
+  }
+
+  .top-left {
+    left:-8px;
+    position:absolute;
+    top:-2px;
+    transform:skew(-10deg);
+  }
+
+  .bottom-right {
+    bottom:-2px;
+    position:absolute;
+    right:-8px;
+    transform:skew(-10deg);
+  }
+
+  .speech {
+    background-color:#fff;
+    border:solid 2px #000;
+    border-radius: 12px;
+    display: block;
+    min-width: 100px;
+    max-width: 520px;
+    max-height: 300px;
+    margin: 2em 1em 0.5em 1em;
+    position: relative;
+
+    p {
+      max-height: 250px;
+      overflow-y: auto;
+      padding: 0 1em;
+      text-align: justify;
+      text-align-last: start;
+
+      &::-webkit-scrollbar {
+        width: 4px;
+        height: 4px; /* A altura só é vista quando a rolagem é horizontal */
+      }
+
+      &::-webkit-scrollbar-track {
+        background: #ddd;
+        padding: 2px;
+        border-radius: 2px;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background-color: #bbb;
+        border-radius: 2px;
+      }
+
+      &:before {
+        border:solid 12px transparent;
+        border-left:solid 12px #000;
+        border-top:solid 12px #000;
+        bottom:-24px;
+        content:"";
+        height:0;
+        left:24px;
+        position:absolute;
+        transform:skew(-10deg);
+        width:0;
+      }
+
+      &:after {
+        border:solid 10px transparent;
+        border-left:solid 10px #fff;
+        border-top:solid 10px #fff;
+        bottom:-19px;
+        content:"";
+        height:0;
+        left:27px;
+        position:absolute;
+        transform:skew(-10deg);
+        width:0;
+      }
+
+    }
+  }
+
+  .info-comics {
+    margin: 8px 16px;
+    padding: 2em 1em 0.5em 1em;
+    background-color:#fff;
+    border:solid 2px #000;
+    display: block;
+  }
+
+  .panel:nth-child(1) {
+    flex-basis: 300px;
+    flex-shrink: 0;
+    flex-grow: 0;
+    width: 300px;
+    height: 400px;
+  }
+  .panel:nth-child(2) {
+    flex-basis: 200px;
+    min-width: 270px;
+    height: auto;
+  }
+  .panel:nth-child(3) {
+    flex-basis: 400px;
+    min-width: 270px;
+    height: auto;
+  }
+  .panel:nth-child(4) {
+    flex-basis: 400px;
+    min-width: 270px;
+    height: auto;
+  }
+
+  .panel:nth-child(4n+1) {
+    background-image:radial-gradient(circle, #ff0, darken(#ff0, 15%));
+  }
+
+  .panel:nth-child(4n+2) {
+    background-image:radial-gradient(circle, #add8e6, darken(#add8e6, 15%));
+  }
+
+  .panel:nth-child(4n+3) {
+    background-image:radial-gradient(circle, #98fb98, darken(#98fb98, 15%));
+  }
+
+  .panel:nth-child(4n+4) {
+    background-image:radial-gradient(circle, #f08080, darken(#f08080, 15%));
+  }
+}
