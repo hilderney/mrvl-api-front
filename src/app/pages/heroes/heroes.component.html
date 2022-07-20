@@ -1,27 +1,22 @@
 <div class="listar-herois">
+
   <div class="filter">
     <form [formGroup]="form">
-      <div class="form-group">
-        <label for="">Nome</label>
+
+      <div class="form-group comic">
+        <label for="nameStartsWith"> Nome </label>
         <input type="text" formControlName="nameStartsWith">
+        <button (click)="fetchHeroes()">
+            Filtrar >
+        </button>
       </div>
-
-      <button (click)="fetchHeroes()"> Filtrar </button>
-
     </form>
   </div>
+
   <div class="list">
-    <pre>
-      {{ (heroes$ | async) | json }}
-    </pre>
+    <ng-container *ngFor="let hero of (heroes$ | async)">
+        <app-hero [hero]="hero"></app-hero>
+    </ng-container>
   </div>
+
 </div>
-
-
-<p>
-  Opções de Rankear Herói
-</p>
-
-<p>
-  Opção de favoritar Herói
-</p>
