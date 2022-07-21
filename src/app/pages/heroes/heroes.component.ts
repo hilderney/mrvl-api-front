@@ -21,7 +21,6 @@ export class HeroesComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-
     this.form = this.formBuilder.group({
       nameStartsWith: ['', [Validators.required, Validators.minLength(2)]],
       limit: [100],

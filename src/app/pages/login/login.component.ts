@@ -1,9 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Loading, Notify } from 'notiflix';
-import { ILoginPayload } from 'src/app/resources/interfaces/login-api.interface';
+import { select, Store } from '@ngrx/store';
+import { tap } from 'rxjs/operators';
+
+import { AppState } from 'src/app/reducers';
+import { ILoginPayload, ILoginResponse } from 'src/app/resources/interfaces/login-api.interface';
 import { AuthenticationService } from 'src/app/resources/services/authentication.service';
+import { isLoggedIn } from './login.selectors';
+import { login } from './login.actions';
+
+import { Loading, Notify } from 'notiflix';
 
 @Component({
   selector: 'app-login',
@@ -12,27 +19,30 @@ import { AuthenticationService } from 'src/app/resources/services/authentication
 })
 export class LoginComponent implements OnInit {
 
-  public form: FormGroup;
+  public form!: FormGroup;
   private returnUrl: any;
 
   constructor(
     private formBuilder: FormBuilder,
     private authenticationService: AuthenticationService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private store: Store<AppState>
   ) {
-    if (this.authenticationService.userValue)
-      this.router.navigate(['/']);
-
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/home';
 
+    const userProfile = localStorage.getItem("user");
+
+    if (userProfile) {
+      this.router.navigateByUrl('/home');
+    }
+  }
+
+  ngOnInit() {
     this.form = this.formBuilder.group({
       email: ['', [Validators.required, Validators.minLength(3)]],
       password: ['', [Validators.required, Validators.minLength(2)]],
     });
-  }
-
-  ngOnInit() {
   }
 
   get controls() { return this.form.controls; }
@@ -49,13 +59,15 @@ export class LoginComponent implements OnInit {
   login() {
     Loading.circle();
 
-    const payload: ILoginPayload = {
-      email: this.form.controls['email'].value,
-      password: this.form.controls['password'].value,
-    }
+    const payload: ILoginPayload = this.form.getRawValue();
 
     this.authenticationService.login(payload)
-      .subscribe({
+      .pipe(
+        tap((response: ILoginResponse) => {
+          const user = response.user;
+          this.store.dispatch(login({ user }));
+        })
+      ).subscribe({
         next: () => {
           this.router.navigate([this.returnUrl]);
           Loading.remove();
