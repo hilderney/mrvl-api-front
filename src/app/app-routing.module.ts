@@ -11,8 +11,16 @@ const routes: Routes = [
     path: '',
     component: MrvlComponent,
     children: [
-      { path: 'home', canActivate: [AuthGuard], data: { roles: [] }, loadChildren: () => import('./pages/home/home.module').then(m => m.HomeModule) },
-      { path: 'herois', canActivate: [AuthGuard], data: { roles: [] }, loadChildren: () => import('./pages/heroes/heroes.module').then(m => m.HeroesModule) },
+      {
+        path: 'home',
+        loadChildren: () => import('./pages/home/home.module').then(m => m.HomeModule),
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'herois',
+        loadChildren: () => import('./pages/heroes/heroes.module').then(m => m.HeroesModule),
+        canActivate: [AuthGuard]
+      },
     ]
   },
   {

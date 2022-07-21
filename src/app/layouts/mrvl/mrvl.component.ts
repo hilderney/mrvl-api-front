@@ -1,6 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { logout } from 'src/app/pages/login/login.actions';
+import { AppState } from 'src/app/reducers';
 import { IUser } from 'src/app/resources/interfaces/user.interface';
 import { AuthenticationService } from 'src/app/resources/services/authentication.service';
 
@@ -9,34 +12,21 @@ import { AuthenticationService } from 'src/app/resources/services/authentication
   templateUrl: './mrvl.component.html',
   styleUrls: ['./mrvl.component.scss']
 })
-export class MrvlComponent implements OnInit, OnDestroy {
+export class MrvlComponent implements OnInit {
 
   public userData!: IUser;
   private destroy$ = new Subject();
 
   constructor(
-    private authService: AuthenticationService,
-  ) {
-    this.authService.user
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(user => {
-        if (user) {
-          console.log(user);
-        }
-      });
-  }
+    private store: Store<AppState>
+  ) { }
 
   ngOnInit() {
-    console.log('set user logged data');
-  }
 
-  ngOnDestroy() {
-    this.destroy$.next(null);
-    this.destroy$.complete();
   }
 
   logOut() {
-    this.authService.logout();
+    this.store.dispatch(logout());
   }
 
 }
