@@ -1,0 +1,40 @@
+@import '../../../styles.scss';
+
+.pagination {
+  position: sticky;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+input {
+  transition: .5s;
+  width: 300px;
+
+  @media (max-width: $tablet-screen) {
+    width: 378px;
+    flex-grow: 1;
+  }
+
+  @media (max-width: $cell-screen) {
+    width: 156px;
+    flex-grow: 1;
+  }
+}
+
+
+
+.heroes-list {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  height: 100%;
+
+  .list {
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+    flex-wrap: nowrap;
+  }
+}
+

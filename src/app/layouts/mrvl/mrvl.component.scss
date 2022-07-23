@@ -17,19 +17,35 @@ header {
   flex-grow: 0;
   height: 50px;
   background-color: #222;
-  color: #ff0;
   overflow: hidden;
+  transition: 0.5s;
 
   ul {
     flex-shrink: 0;
 
-    li {
+    li, button {
       display: inline;
       margin-left: 8px;
-      padding: 8px 16px;
+      padding: 8px 16px 4px 8px;
+      border: 0;
+      outline: 0;
+      border-bottom-style: solid;
+      border-bottom-width: 4px;
+      border-bottom-color: transparent;
+      background-color: transparent;
+      font-family: 'Comic Sans', cursive;
+      font-size: 16px;
+      color: #ff0;
+      cursor: pointer;
+      transition: 1s;
 
       :first-child {
         margin-left: 16px;
+      }
+
+      &:hover {
+        color: lighten(#ff0, 15%);
+        border-bottom-color: darken(#222, 15%);
       }
 
     }
@@ -45,11 +61,13 @@ header {
   width: 100%;
   height: calc(100vh - 70px);
   align-items: stretch;
+  overflow-x: hidden;
   overflow-y: auto;
 
   .content-wrapper {
+    align-self: center;
     min-width: 270px;
-    width: auto;
+    width: 100%;
     max-width: 1024px;
     height: inherit;
   }

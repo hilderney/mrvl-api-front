@@ -1,9 +1,118 @@
+@import '../../../styles.scss';
+
+.hero-wrapper {
+  border-left: 4px solid #222;
+  border-bottom: 4px solid #222;
+  border-right: 4px solid #222;
+  margin: 4px 0;
+  min-height: 200px;
+  overflow: hidden;
+  transition: 0.5s;
+  box-shadow: -4px 4px 0 #999;
+
+  &:hover {
+    transition: 0.5s;
+    box-shadow: 2px 4px 0 darken(#ff0, 15%);
+  }
+}
+
+.btn-action {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 4px 0;
+  cursor: pointer;
+  background-color: #222;
+  color: darken(#ff0, 15%);
+  transition: 1s;
+
+  &:hover {
+    color: #ff0;
+    transition: 1s;
+  }
+
+  span {
+    height: 24px;
+    margin: 0;
+    padding: 0;
+    background-color: transparent;
+  }
+}
+
+table {
+  width: 100%;
+
+  th, th span {
+    color: #999;
+    @media (min-width: $tablet-screen) {
+      font-size: 0.9rem;
+    }
+  }
+
+  th, td {
+    text-align: center;
+  }
+
+  th, td {
+    padding: 4px 8px;
+
+    &:nth-child(1) {
+      width: 90px;
+      @media (max-width: $tablet-screen) {
+        min-width: 65px;
+      }
+    }
+    &:nth-child(2) {
+      text-align: left;
+    }
+    &:nth-child(3) {
+      width: 66px;
+      @media (max-width: $tablet-screen) {
+        width: 1%;
+      }
+    }
+    &:nth-child(4) {
+      width: 98px;
+      @media (max-width: $tablet-screen) {
+        width: 1%;
+      }
+    }
+    &:nth-child(5) {
+      width: 136px;
+      @media (max-width:$tablet-screen) {
+        width: 1%;
+      }
+    }
+    &:nth-child(6) {
+      width: 116px;
+      @media (max-width: $tablet-screen) {
+        width: 1%;
+      }
+    }
+  }
+
+  .clickable {
+    cursor: pointer;
+    transition: 0.5;
+
+    &:hover {
+      color: #6225E6;
+      transition: 0.5;
+    }
+  }
+}
+
 .comic {
   display:flex;
   justify-content: center;
   flex-wrap:wrap;
   font-family:'Comic Sans', cursive;
   padding:1vmin;
+
+  h3 {
+    text-align: center;
+    margin: 8px 0;
+  }
 
   .panel {
     display: flex;
@@ -60,6 +169,7 @@
       text-align: justify;
       text-align-last: start;
 
+
       &::-webkit-scrollbar {
         width: 4px;
         height: 4px; /* A altura só é vista quando a rolagem é horizontal */
@@ -105,12 +215,36 @@
     }
   }
 
-  .info-comics {
-    margin: 8px 16px;
-    padding: 2em 1em 0.5em 1em;
+  .info-heroes {
+    margin: 36px 8px 32px 8px;
     background-color:#fff;
     border:solid 2px #000;
     display: block;
+    min-width: 260px;
+
+    .content-overflow {
+      max-height: 8rem;
+      overflow-y: auto;
+      padding: 0 1em 0.5em 1em;
+      text-align: justify;
+      text-align-last: start;
+
+      &::-webkit-scrollbar {
+        width: 4px;
+        height: 4px; /* A altura só é vista quando a rolagem é horizontal */
+      }
+
+      &::-webkit-scrollbar-track {
+        background: #ddd;
+        padding: 2px;
+        border-radius: 2px;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background-color: #bbb;
+        border-radius: 2px;
+      }
+    }
   }
 
   .panel:nth-child(1) {
@@ -119,20 +253,24 @@
     flex-grow: 0;
     width: 300px;
     height: 400px;
+    @media (max-width: 614px) {
+      flex-grow: 1;
+    }
   }
   .panel:nth-child(2) {
-    flex-basis: 200px;
-    min-width: 270px;
+    flex-basis: 300px;
+    min-width: 300px;
     height: auto;
   }
   .panel:nth-child(3) {
-    flex-basis: 400px;
-    min-width: 270px;
+    flex-basis: 345px;
+    flex-wrap: wrap;
+    min-width: 300px;
     height: auto;
   }
   .panel:nth-child(4) {
-    flex-basis: 400px;
-    min-width: 270px;
+    flex-basis: 300px;
+    min-width: 300px;
     height: auto;
   }
 

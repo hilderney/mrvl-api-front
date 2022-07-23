@@ -1,5 +1,7 @@
 export interface ICharPayload {
-
+  nameStartsWith: string,
+  limit: number,
+  offset: number,
 }
 
 export interface ICharResponse {
@@ -10,6 +12,25 @@ export interface ICharResponse {
   attributionHTML: string;
   etag: string;
   data: ICharData;
+}
+
+export interface IpaginationResult<T> {
+  pagination: IPaginationView,
+  heroes: T
+}
+
+export interface IPaginationView {
+  first: number;
+  previous: number;
+  page: number;
+  next: number;
+  last: number;
+  hasPrev: boolean;
+  hasNext: boolean;
+  count: number;
+  limit: number;
+  offset: number;
+  total: number;
 }
 
 

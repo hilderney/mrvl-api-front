@@ -1,14 +1,33 @@
-<div class="listar-herois">
+<div class="heroes-list">
 
   <div class="filter">
     <form [formGroup]="form">
 
       <div class="form-group comic">
-        <label for="nameStartsWith"> Nome </label>
+        <label for="nameStartsWith" class="no-mobile">
+          Nome
+        </label>
+
         <input type="text" formControlName="nameStartsWith">
+
         <button (click)="fetchHeroes()">
-            Filtrar >
+          <span class="no-tablet">
+            Filtrar
+          </span>
+          <span class="material-icons material-icons-outlined">
+            filter_alt
+          </span>
         </button>
+
+        <button class="cancel" (click)="clearHeroesStorage()">
+          <span class="no-tablet">
+            Resetar
+          </span>
+          <span class="material-icons material-icons-outlined">
+            dangerous
+          </span>
+        </button>
+
       </div>
     </form>
   </div>
@@ -17,6 +36,13 @@
     <ng-container *ngFor="let hero of (heroes$ | async)">
         <app-hero [hero]="hero"></app-hero>
     </ng-container>
+  </div>
+  <div class="pagination">
+    <app-pagination
+        [pagination]="pagination"
+        [paginationSize]="paginationSize"
+        (paginationEmit)="updatePagination($event)"
+      ></app-pagination>
   </div>
 
 </div>
