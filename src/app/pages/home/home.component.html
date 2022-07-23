@@ -2,14 +2,21 @@
   Informação do Usuário
 </p>
 
-<p>
-  Top Five Personagens
-</p>
+<div>
+  <button (click)="tabTopFive = true"> Top 5</button>
+  <button (click)="tabTopFive = false"> Favoritos </button>
+</div>
 
-<p>
-  Favoritos
-</p>
+<div class="list-top-five" [@openClose]="tabTopFive ? 'open' : 'closed'">
+  <h3> TOP 5 </h3>
+  <ng-container *ngFor="let top5 of (topFiveListed$ | async)">
+      <app-hero [hero]="top5"></app-hero>
+  </ng-container>
+</div>
 
-<p>
-  User Info
-</p>
+<div class="list-favourites" [@openClose]="!tabTopFive ? 'open' : 'closed'">
+  <h3> Favoritos </h3>
+  <ng-container *ngFor="let hero of (heroesListed$ | async)">
+      <app-hero [hero]="hero"></app-hero>
+  </ng-container>
+</div>

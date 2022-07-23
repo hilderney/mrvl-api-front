@@ -1,5 +1,11 @@
   <div class="wrapper">
 
+    <div class="item" (click)="setValue(0)">
+      <span class="material-icons material-icons-outlined">
+        clear
+      </span>
+    </div>
+
     <div class="item" (click)="setValue(1)">
       <span class="material-icons material-icons-outlined">
         {{ power >= 1 ? 'star' : 'star_border' }}

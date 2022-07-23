@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Notify } from 'notiflix';
 import { LocalStorageNames } from 'src/app/resources/consts/localstorage-names.const';
 import { ICharFavourite, ICharShortResult } from 'src/app/resources/interfaces/character.interface';
 import { FavouritesService } from 'src/app/resources/services/favourites.service';
@@ -43,10 +44,20 @@ export class FavouriteComponent implements OnInit {
     const indexHero = this.favService
       .findHeroIndexById(this.heroesListed, this.fav.heroId);
 
-    if (indexHero >= 0)
-      this.heroesListed[indexHero].power = this.power;
-    else
+    if (indexHero < 0 && this.power > 0) {
+      Notify.info('Herói adicionado a Favoritos');
       this.heroesListed.push(this.fav);
+      this.favService.listChanged(true);
+    }
+    else if (this.power === 0) {
+      Notify.info('Herói removido de Favoritos');
+      this.heroesListed.splice(indexHero, 1);
+      this.favService.listChanged(true);
+    }
+    else {
+      this.heroesListed[indexHero].power = this.power;
+      this.favService.listChanged(true);
+    }
 
     this.favService.saveList(this.heroesListed);
   }
