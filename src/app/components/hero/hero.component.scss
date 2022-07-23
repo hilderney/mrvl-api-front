@@ -41,6 +41,7 @@
 
 table {
   width: 100%;
+  position: relative;
 
   th, th span {
     color: #999;
@@ -64,6 +65,8 @@ table {
     }
     &:nth-child(2) {
       text-align: left;
+      vertical-align: top;
+      padding-top: 5px;
     }
     &:nth-child(3) {
       width: 66px;
@@ -288,5 +291,18 @@ table {
 
   .panel:nth-child(4n+4) {
     background-image:radial-gradient(circle, #f08080, darken(#f08080, 15%));
+  }
+}
+
+.favourite-container {
+  background-color: transparent;
+  position: absolute;
+  bottom: 0px;
+  right: 0;
+  height: 32px;
+
+  &.full-white {
+    left: 0;
+    background-color: rgba(255,255,255,0.65);
   }
 }

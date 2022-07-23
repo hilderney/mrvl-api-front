@@ -3,7 +3,9 @@ export const LocalStorageNames = {
   lastSearch: 'last-search',
   lastPagination: 'last-pagination',
   heroesListed: 'heroes-listed',
-  favoriteHeroes: 'favorite-heroes',
+  favouriteHeroes: 'favourite-heroes',
+  favouriteHasChanged: 'favourite-has-changed',
+  favouriteHeroesListed: 'favourite-heroes-listed',
   heroesRank: 'heroes-rank',
   heroesTopFive: 'heroes-top-five',
 }
