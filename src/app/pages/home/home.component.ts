@@ -22,10 +22,10 @@ import { FavouritesService } from 'src/app/resources/services/favourites.service
         opacity: 0,
       })),
       transition('open => closed', [
-        animate('0.5s 0.2s ease-in')
+        animate('0.3s 0.15s ease-in')
       ]),
       transition('closed => open', [
-        animate('0.5s 0.2s ease-in')
+        animate('0.3s 0.15s ease-in')
       ])
     ]),
   ],
@@ -74,7 +74,6 @@ export class HomeComponent implements OnInit {
   }
 
   listTopFive() {
-
     this.topFiveListed$ = this.heroesListed$
       .pipe(
         map((heroes: ICharShortResult[]) => {
@@ -82,7 +81,7 @@ export class HomeComponent implements OnInit {
           const topFiveIds: number[] = this.favService.fetchIdsFromFavourites(this.topFive);
           return this.favService.findHeroesByIds(heroes, topFiveIds);
         })
-      )
+      );
   }
 
   findTopFiveFavs(): ICharFavourite[] {

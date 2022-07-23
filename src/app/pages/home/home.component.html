@@ -1,21 +1,19 @@
-<p>
-  Informação do Usuário
-</p>
-
-<div>
-  <button (click)="tabTopFive = true"> Top 5</button>
-  <button (click)="tabTopFive = false"> Favoritos </button>
+<div class="tab-wrapper">
+  <div class="tab" (click)="tabTopFive = true"
+    [ngClass]="{'active' : tabTopFive}"
+  > Top 5 </div>
+  <div class="tab" (click)="tabTopFive = false"
+    [ngClass]="{'active' : !tabTopFive}"
+  > Favoritos </div>
 </div>
 
 <div class="list-top-five" [@openClose]="tabTopFive ? 'open' : 'closed'">
-  <h3> TOP 5 </h3>
-  <ng-container *ngFor="let top5 of (topFiveListed$ | async)">
-      <app-hero [hero]="top5"></app-hero>
+  <ng-container *ngFor="let topFive of (topFiveListed$ | async)">
+      <app-hero [hero]="topFive"></app-hero>
   </ng-container>
 </div>
 
 <div class="list-favourites" [@openClose]="!tabTopFive ? 'open' : 'closed'">
-  <h3> Favoritos </h3>
   <ng-container *ngFor="let hero of (heroesListed$ | async)">
       <app-hero [hero]="hero"></app-hero>
   </ng-container>
