@@ -19,21 +19,6 @@ export interface IpaginationResult<T> {
   heroes: T
 }
 
-export interface IPaginationView {
-  first: number;
-  previous: number;
-  page: number;
-  next: number;
-  last: number;
-  hasPrev: boolean;
-  hasNext: boolean;
-  count: number;
-  limit: number;
-  offset: number;
-  total: number;
-}
-
-
 export interface ICharData {
   offset: number,
   limit: number,
@@ -57,27 +42,46 @@ export interface ICharShortResult {
 }
 
 
-export interface ICharShortThumb {
+interface ICharShortThumb {
   path: string;
   extension: string;
 }
 
-export interface ICharShortAparitions {
+interface ICharShortAparitions {
   available: number;
   collectionURI: string;
   returned: number;
   items: ICharShortAparitionsItem[];
 }
 
-export interface ICharShortAparitionsItem {
+interface ICharShortAparitionsItem {
   resourceURI: string;
   name: string;
   type?: string;
 }
 
-export interface IUrls {
+interface IUrls {
   type: string;
   url: string;
+}
+
+export interface IPaginationView {
+  first: number;
+  previous: number;
+  page: number;
+  next: number;
+  last: number;
+  hasPrev: boolean;
+  hasNext: boolean;
+  count: number;
+  limit: number;
+  offset: number;
+  total: number;
+}
+
+export interface ICharFavourite {
+  heroId: number,
+  power: number,
 }
 
 

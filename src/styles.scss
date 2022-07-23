@@ -93,6 +93,14 @@ div {
     outline: none;
     font-family: 'Comic Sans', cursive;
 
+    span {
+      transform: skewX(10deg);
+    }
+
+    &.cancel {
+      background-color: #f00;
+    }
+
     &:focus {
       outline: none;
     }
