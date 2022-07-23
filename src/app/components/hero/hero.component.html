@@ -1,43 +1,171 @@
-<div class="card-hero">
-  <article class="comic">
-    <div class="panel img">
-      <p class="text top-left">{{hero.name}}...</p>
-      <img src="{{hero.thumbnail.path + '/portrait_uncanny' + '.' + hero.thumbnail.extension}}" alt="{{hero.name}}">
+<div class="hero-wrapper">
+  <div class="btn-action" (click)="showFullData = !showFullData">
+    <span class="no-tablet">
+      Detalhes
+    </span>
+    <span
+      [@openClose]="showFullData ? 'down' : 'up'"
+      class="material-icons material-icons-outlined">
+      expand_more
+    </span>
+  </div>
+
+  <div class="card-hero-short " [@openClose]="!showFullData ? 'open' : 'closed'">
+    <div class="comic">
+      <table>
+        <thead>
+          <th>
+            <span class="no-tablet">
+              IMAGEM
+            </span>
+            <span class="material-icons material-icons-outlined">
+              photo_camera
+              </span>
+          </th>
+          <th>
+            <span class="no-tablet">
+              NOME
+            </span>
+            <span class="material-icons material-icons-outlined">
+              account_circle
+            </span>
+          </th>
+          <th>
+            <span class="no-tablet">
+              HQ
+            </span>
+            <span class="material-icons material-icons-outlined">
+              auto_stories
+            </span>
+          </th>
+          <th>
+            <span class="no-tablet">
+              SERIES
+            </span>
+            <span class="material-icons material-icons-outlined">
+              all_inclusive
+            </span>
+          </th>
+          <th>
+            <span class="no-tablet">
+              HISTÓRIAS
+            </span>
+            <span class="material-icons material-icons-outlined">
+              history_edu
+            </span>
+          </th>
+          <th>
+            <span class="no-tablet">
+              EVENTOS
+            </span>
+            <span class="material-icons material-icons-outlined">
+              star_half
+            </span>
+          </th>
+        </thead>
+        <tbody>
+          <td>
+            <div class="clickable" (click)="showFullData = !showFullData">
+              <img src="{{hero.thumbnail.path + '/standard_medium' + '.' + hero.thumbnail.extension}}" alt="{{hero.name}}">
+            </div>
+          </td>
+          <td>
+            <span class="clickable" (click)="showFullData = !showFullData">
+              {{ hero.name }}
+            </span>
+          </td>
+          <td>
+            <span>
+              {{ !!hero.comics.available ? hero.comics.available : 0 }}
+            </span>
+          </td>
+          <td>
+            <span>
+              {{ !!hero.series.available ? hero.series.available : 0 }}
+            </span>
+          </td>
+          <td>
+            <span>
+              {{ !!hero.stories.available ? hero.stories.available : 0 }}
+            </span>
+          </td>
+          <td>
+            <span>
+              {{ !!hero.events.available ? hero.events.available : 0 }}
+            </span>
+          </td>
+        </tbody>
+      </table>
+
     </div>
-    <div class="panel info">
-      <p class="text top-left">Sobre o personagem...</p>
-      <div class="speech" *ngIf="!!hero.description; else semInfo;">
-        <p>{{hero.description}}</p>
+  </div>
+
+  <div class="card-hero" [@openClose]="showFullData ? 'open' : 'closed'">
+    <article class="comic">
+      <div class="panel img">
+        <p class="text top-left">{{hero.name}}...</p>
+        <img src="{{hero.thumbnail.path + '/portrait_uncanny' + '.' + hero.thumbnail.extension}}" alt="{{hero.name}}">
       </div>
-      <ng-template #semInfo>
-        <p class="speech">
-          Sem Informações
-        </p>
-      </ng-template>
-    </div>
-    <div class="panel">
-      <p class="text top-left">Curiosidades...</p>
-
-      <div class="info-comics" *ngIf="hero.comics.available > 0">
-        <h3> Aparece em {{hero.comics.available}} revistas </h3>
-        <ul *ngFor="let comic of hero.comics.items;">
-          <li>
-            {{comic.name}}
-          </li>
-        </ul>
+      <div class="panel info">
+        <p class="text top-left">Sobre o personagem...</p>
+        <div class="speech" *ngIf="!!hero.description; else semInfo;">
+          <p>{{hero.description}}</p>
+        </div>
+        <ng-template #semInfo>
+          <div class="speech">
+            <p> Sem Informações </p>
+          </div>
+        </ng-template>
       </div>
+      <div class="panel">
+        <p class="text top-left">Curiosidades...</p>
 
-      <button> ...mais detalhes </button>
+        <div class="info-heroes" *ngIf="hero.comics.available > 0">
+          <h3> Aparece em {{hero.comics.available}} HQs </h3>
+          <ul class="content-overflow">
+            <li *ngFor="let comic of hero.comics.items;">
+              {{comic.name}}
+            </li>
+          </ul>
+        </div>
 
-      <p class="text bottom-right">THE END</p>
-    </div>
-  </article>
+        <div class="info-heroes" *ngIf="hero.series.available > 0">
+          <h3> Aparece em {{hero.series.available}} Séries </h3>
+          <ul class="content-overflow">
+            <li *ngFor="let series of hero.series.items;">
+              {{series.name}}
+            </li>
+          </ul>
+        </div>
 
-  <p>
-    Rankear Herói
-  </p>
+        <div class="info-heroes" *ngIf="hero.stories.available > 0">
+          <h3> Aparece em {{hero.stories.available}} Sagas </h3>
+          <ul class="content-overflow">
+            <li *ngFor="let stories of hero.stories.items;">
+              {{stories.name}}
+            </li>
+          </ul>
+        </div>
 
-  <p>
-    Favoritar Herói
-  </p>
+        <div class="info-heroes" *ngIf="hero.events.available > 0">
+          <h3> Aparece em {{hero.events.available}} Eventos </h3>
+          <ul class="content-overflow">
+            <li *ngFor="let events of hero.events.items;">
+              {{events.name}}
+            </li>
+          </ul>
+        </div>
+
+        <p class="text bottom-right">THE END</p>
+      </div>
+    </article>
+
+    <p>
+      Rankear Herói
+    </p>
+
+    <p>
+      Favoritar Herói
+    </p>
+  </div>
 </div>

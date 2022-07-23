@@ -16,8 +16,14 @@ export class SharedHeroServiceApi {
     if (!!payload) {
       const paramsName = Object.keys(payload);
       paramsName.forEach(item => {
-        const itemToAdd = payload[item].length > 0 ? `&${item}=${payload[item]}` : '';
-        params = params.concat(itemToAdd);
+        if (typeof (payload[item]) === 'number') {
+          const itemToAdd = payload[item] > 0 ? `&${item}=${payload[item]}` : '';
+          params = params.concat(itemToAdd);
+        }
+        if (typeof (payload[item]) === 'string') {
+          const itemToAdd = payload[item].length > 0 ? `&${item}=${payload[item]}` : '';
+          params = params.concat(itemToAdd);
+        }
       });
     }
 

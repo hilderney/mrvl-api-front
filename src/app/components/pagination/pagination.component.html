@@ -1,0 +1,27 @@
+<div class="pagination">
+  <button
+    (click)="goToPage(pagination.first)"
+    [disabled]="!pagination.hasPrev">
+    Início
+  </button>
+  <button
+    (click)="goToPage(pagination.previous)"
+    [disabled]="!pagination.hasPrev">
+    Anterior
+  </button>
+  <input type="number"
+    min="{{pagination.first}}"
+    max="{{ pagination.last }}"
+    [(ngModel)]="pagination.page"
+    (change)="goToPage(pagination.page)">
+  <button
+    (click)="goToPage(pagination.next)"
+    [disabled]="!pagination.hasNext">
+    Próxima
+  </button>
+  <button
+    (click)="goToPage(pagination.last)"
+    [disabled]="!pagination.hasNext">
+    Última
+  </button>
+</div>
