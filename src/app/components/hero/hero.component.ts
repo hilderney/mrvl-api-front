@@ -30,10 +30,10 @@ import { ICharShortResult } from 'src/app/resources/interfaces/character.interfa
         transform: 'rotate(0deg)',
       })),
       transition('down => up', [
-        animate('0.5s 0.15s ease-in')
+        animate('0.3s 0.15s ease-in')
       ]),
       transition('up => down', [
-        animate('0.5s 0.15s ease-in')
+        animate('0.3s 0.15s ease-in')
       ]),
     ]),
   ],
