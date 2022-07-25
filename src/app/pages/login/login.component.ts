@@ -69,6 +69,7 @@ export class LoginComponent implements OnInit {
         })
       ).subscribe({
         next: () => {
+          Notify.success('Usuário Logado');
           this.router.navigate([this.returnUrl]);
           Loading.remove();
         },

@@ -60,6 +60,14 @@ export class HomeComponent implements OnInit, AfterViewChecked {
     this.changeRef.detectChanges();
   }
 
+  changeTabTopFive(topFiveSelected: boolean) {
+    if (this.favService.hasListChanged()) {
+      this.fetchFavouritesHeroes();
+      this.listTopFive();
+    }
+    this.tabTopFive = topFiveSelected;
+  }
+
   fetchFavouritesHeroes() {
 
     if (!this.favService.hasListChanged()) {

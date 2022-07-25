@@ -3,10 +3,10 @@
 </div>
 
 <div class="tab-wrapper">
-  <div class="tab" (click)="tabTopFive=true"
+  <div class="tab" (click)="changeTabTopFive(true)"
     [ngClass]="{'active' : tabTopFive}"
   > Top 5 </div>
-  <div class="tab" (click)="tabTopFive=false"
+  <div class="tab" (click)="changeTabTopFive(false)"
     [ngClass]="{'active' : !tabTopFive}"
   > Favoritos </div>
 </div>

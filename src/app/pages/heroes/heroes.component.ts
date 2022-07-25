@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControlName, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import * as Notiflix from 'notiflix';
 import { map, Observable, of } from 'rxjs';
 import { LocalStorageNames } from 'src/app/resources/consts/localstorage-names.const';
 import { InitialPaginationValues } from 'src/app/resources/consts/pagination.const';
 import { ICharShortResult, IpaginationResult, IPaginationView } from 'src/app/resources/interfaces/character.interface';
 import { CharacterService } from 'src/app/resources/services/character.service';
+import { login } from '../login/login.actions';
 
 @Component({
   selector: 'app-heroes',
@@ -27,6 +30,7 @@ export class HeroesComponent implements OnInit {
   constructor(
     private service: CharacterService,
     private formBuilder: FormBuilder,
+    private router: Router,
   ) { }
 
   ngOnInit() {
@@ -93,7 +97,8 @@ export class HeroesComponent implements OnInit {
     this.heroes$ = this.paginationResult$
       .pipe(
         map(response => {
-          this.clearHeroesStorage();
+          localStorage.removeItem(LocalStorageNames.heroesListed);
+          localStorage.removeItem(LocalStorageNames.lastSearch);
           this.updateHeroesLocalStorage(response);
           this.pagination = response.pagination;
           return response.heroes;
@@ -114,8 +119,23 @@ export class HeroesComponent implements OnInit {
   }
 
   clearHeroesStorage() {
-    localStorage.removeItem(LocalStorageNames.heroesListed);
-    localStorage.removeItem(LocalStorageNames.lastSearch);
+    Notiflix.Confirm.show(
+      `Confirmação de Exclusão`,
+      `tem certeza que deseja fazer isso?
+      Tudo será ReadableStreamDefaultController, seus favoritos e inclusive seu login`,
+      `Apagar Tudo`,
+      `Cancelar`,
+      () => {
+        Notiflix.Notify.success(`Dados excluídos com sucesso.`);
+        setTimeout(() => {
+          this.router.navigateByUrl('/login');
+        }, 3000);
+        localStorage.clear();
+      },
+      () => {
+        Notiflix.Notify.success(`Seus dados permanecem intactos`)
+      }
+    )
   }
 
 }
