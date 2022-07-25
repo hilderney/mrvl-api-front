@@ -1,0 +1,20 @@
+<div class="hero-profile">
+  <div class="info">
+    <div class="image">
+      <img src="{{data.thumbnail.path + '/standard_medium' + '.' + data.thumbnail.extension}}" alt="{{data.name}}">
+    </div>
+    <div class="about">
+      <div>
+        <strong>{{data.name}}</strong>
+      </div>
+      <p *ngIf="!!data.description; else semInfo;">
+        {{data.description}}
+      </p>
+      <ng-template #semInfo>
+        <p>
+          Sem descrição...
+        </p>
+      </ng-template>
+    </div>
+  </div>
+</div>

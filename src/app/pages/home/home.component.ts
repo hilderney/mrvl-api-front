@@ -1,8 +1,10 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { Component, OnInit } from '@angular/core';
+import { AfterViewChecked, AfterViewInit, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { combineLatest, Observable, of } from 'rxjs';
 import { map, take, tap } from 'rxjs/operators';
 import { ICharFavourite, ICharShortResult } from 'src/app/resources/interfaces/character.interface';
+import { BannerItemModel } from 'src/app/resources/models/banner-item.model';
+import { BannerService } from 'src/app/resources/services/banner.service';
 import { CharacterService } from 'src/app/resources/services/character.service';
 import { FavouritesService } from 'src/app/resources/services/favourites.service';
 
@@ -30,7 +32,7 @@ import { FavouritesService } from 'src/app/resources/services/favourites.service
     ]),
   ],
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, AfterViewChecked {
 
   heroesListed$!: Observable<ICharShortResult[]>;
   topFiveListed$!: Observable<ICharShortResult[]>;
@@ -39,20 +41,35 @@ export class HomeComponent implements OnInit {
   paginationSize: number = 10;
   tabTopFive: boolean = true;
 
+  banners: BannerItemModel[] = [];
+
   constructor(
     private favService: FavouritesService,
     private charService: CharacterService,
-  ) { }
-
+    private adService: BannerService,
+    private changeRef: ChangeDetectorRef
+  ) {
+  }
+  ;
   ngOnInit() {
     this.fetchFavouritesHeroes();
     this.listTopFive();
   }
 
+  ngAfterViewChecked(): void {
+    this.changeRef.detectChanges();
+  }
+
   fetchFavouritesHeroes() {
 
     if (!this.favService.hasListChanged()) {
-      this.heroesListed$ = this.favService.fetchHeroesListed();
+      this.heroesListed$ = this.favService.fetchHeroesListed()
+        .pipe(
+          map((heroes: ICharShortResult[]) => {
+            this.banners = this.adService.getAds(heroes);
+            return heroes;
+          })
+        );
       return;
     }
 
@@ -68,6 +85,7 @@ export class HomeComponent implements OnInit {
         map((response: ICharShortResult[]) => {
           this.favService.saveFavouriteHeroesList(response);
           this.favService.listChanged(false);
+          this.banners = this.adService.getAds(response);
           return response;
         })
       );
